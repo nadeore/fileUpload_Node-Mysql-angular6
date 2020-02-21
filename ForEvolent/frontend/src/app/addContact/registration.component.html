@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="reglist">
+    <div class="text-right">
+      <button type="submit" class="btn btn-primary" (click)="addNew()">Add New</button>
+      <a class="btn btn-primary" routerLink="/addfile">UploadFile</a>
+    </div>
+    <div class="table-responsive">
+    <table role="table" class="table table-striped table-bordered">
+      <thead role="rowgroup">
+        <tr role="row">
+          <th role="columnheader">#</th>
+          <th role="columnheader">First Name</th>
+          <th role="columnheader">Last Name</th>
+          <th role="columnheader">Email</th>
+          <th role="columnheader">Phone No</th>
+          <th role="columnheader">Action</th>
+        </tr>
+      </thead>
+      <tbody role="rowgroup">
+        <tr *ngFor="let users of user; let i = index" role="row">
+          <td role="cell">{{ i + 1 }}</td>
+          <td role="cell">{{ users.FirstName }}</td>
+          <td role="cell">{{ users.LastName }}</td>
+          <td role="cell">{{ users.Email }}</td>
+          <td role="cell">{{ users.PhoneNumber }}</td>
+          <td role="cell">
+            <button type="button" class="btn btn-info" (click)="onEdit(users.id )">Edit</button>
+            <button type="button" class="btn btn-danger" (click)="onDelete( users.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  <br>
+  <div class="regentry" *ngIf="showNew">
+    <form (ngSubmit)="onSave()">
+      <div class="form-group row">
+        <label class="col-2 col-form-label">First Name</label>
+        <div class="col-10">
+          <input class="form-control" type="text" [(ngModel)]="regModel.FirstName" name="FirstName" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Last Name</label>
+        <div class="col-10">
+          <input class="form-control" type="text" [(ngModel)]="regModel.LastName" name="LastName" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Email</label>
+        <div class="col-10">
+          <input class="form-control" type="email" [(ngModel)]="regModel.Email" name="Email" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-2 col-form-label">Phone No</label>
+        <div class="col-10">
+          <input class="form-control" type="text" [(ngModel)]="regModel.PhoneNumber" maxlength="10"  minlength="9"  name="PhoneNumber" required>
+        </div>
+        <input class="form-control" type="hidden" [(ngModel)]="regModel.id" name="id">
+      </div>
+        <button type="submit" class="btn btn-success">{{ submitType }}</button>
+        <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancel</button>
+    </form>
+  </div>
+</div>
